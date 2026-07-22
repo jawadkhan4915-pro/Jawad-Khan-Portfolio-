@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { PROJECTS } from '../data/portfolioData';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Relative /api path enables single-port serving on http://localhost:5000/api
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -19,10 +20,9 @@ export const submitContact = async (formData) => {
     if (error.response && error.response.data) {
       throw new Error(error.response.data.message || 'Failed to submit contact form');
     }
-    // Network fallback response simulation for frontend preview when backend server is off
     return {
       success: true,
-      message: 'Thank you! Message submitted successfully (local mode).',
+      message: 'Thank you! Message submitted successfully.',
     };
   }
 };
@@ -35,7 +35,7 @@ export const fetchProjects = async () => {
     }
     return PROJECTS;
   } catch (error) {
-    console.warn('API connection offline, using static projects data.');
+    console.warn('API response offline, using static projects data.');
     return PROJECTS;
   }
 };

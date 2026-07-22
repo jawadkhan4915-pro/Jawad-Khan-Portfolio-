@@ -2,14 +2,16 @@
   "name": "jawad-khan-portfolio",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "workspaces": [
     "client",
     "server"
   ],
   "scripts": {
-    "dev:client": "npm run dev --prefix client",
-    "dev:server": "npm run dev --prefix server",
+    "dev": "node server/index.js",
+    "start": "node server/index.js",
+    "build": "npm run build --prefix client",
     "build:client": "npm run build --prefix client",
-    "install:all": "npm install --prefix client && npm install --prefix server"
+    "server": "node server/index.js"
   }
 }
