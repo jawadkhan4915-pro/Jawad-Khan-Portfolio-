@@ -16,7 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+let PORT = process.env.PORT || 5000;
 
 // Connect Database
 connectDB();
@@ -32,6 +32,7 @@ app.use(
 const allowedOrigins = [
   process.env.CLIENT_URL || 'http://localhost:5173',
   'http://localhost:5000',
+  'http://localhost:5001',
   'http://localhost:3000',
   'https://jawadkhan-portfolio.vercel.app',
 ];
@@ -89,8 +90,20 @@ app.get('*', (req, res) => {
 // Error Handler
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`\n🚀 Jawad Khan Portfolio App running on SINGLE PORT: http://localhost:${PORT}`);
   console.log(`🌐 Frontend Web App & 3D Engine: http://localhost:${PORT}`);
   console.log(`⚡ Backend REST APIs: http://localhost:${PORT}/api/health\n`);
+});
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    const fallbackPort = Number(PORT) + 1;
+    console.log(`\n⚠️ Port ${PORT} is busy. Automatically switching to fallback port: http://localhost:${fallbackPort}`);
+    app.listen(fallbackPort, () => {
+      console.log(`🚀 Server active on: http://localhost:${fallbackPort}\n`);
+    });
+  } else {
+    console.error('Server error:', err);
+  }
 });
