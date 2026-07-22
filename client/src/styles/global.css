@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary:   #0B0F1A;   /* deep navy-black base */
+  --bg-secondary: #121826;   /* slightly lighter panel/section bg */
+  --bg-card:      #161D2E;   /* card/glass surface base */
+  --accent-1:     #6C63FF;   /* electric indigo */
+  --accent-2:     #00D4FF;   /* cyan */
+  --accent-3:     #FF6EC7;   /* soft magenta */
+  --gradient-brand: linear-gradient(135deg, #6C63FF 0%, #00D4FF 100%);
+  --text-primary:   #F5F7FA;
+  --text-secondary: #A0AAC0;
+  --text-muted:     #6B7488;
+  --border-glass:   rgba(255, 255, 255, 0.08);
+  --success: #34D399;
+  --error:   #FB7185;
+}
+
+:root[data-theme="light"] {
+  --bg-primary:   #F7F8FC;
+  --bg-secondary: #FFFFFF;
+  --bg-card:      #FFFFFF;
+  --accent-1:     #5B4FE9;   /* deepened indigo */
+  --accent-2:     #00A8CC;   /* deepened cyan */
+  --accent-3:     #E64BA5;
+  --gradient-brand: linear-gradient(135deg, #5B4FE9 0%, #00A8CC 100%);
+  --text-primary:   #10131C;
+  --text-secondary: #4B5468;
+  --text-muted:     #7A8299;
+  --border-glass:   rgba(16, 19, 28, 0.08);
+  --success: #059669;
+  --error:   #E11D48;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-card);
+  border-radius: 4px;
+  border: 1px solid var(--border-glass);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-1);
+}
+
+/* Custom Utility Classes */
+.gradient-text {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gradient-brand);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.glass-card {
+  background-color: rgba(22, 29, 46, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-radius: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root[data-theme="light"] .glass-card {
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.glass-card:hover {
+  border-color: rgba(108, 99, 255, 0.4);
+  box-shadow: 0 12px 40px rgba(108, 99, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+.glass-nav {
+  background-color: rgba(11, 15, 26, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+:root[data-theme="light"] .glass-nav {
+  background-color: rgba(247, 248, 252, 0.85);
+}
+
+/* Radial Glow Orbs */
+.glow-orb-1 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.25) 0%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.glow-orb-2 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* Custom Cursor styling */
+.custom-cursor {
+  pointer-events: none;
+  position: fixed;
+  z-index: 9999;
+  border-radius: 50%;
+  transition: transform 0.15s ease-out, background-color 0.2s ease, width 0.2s ease, height 0.2s ease;
+}
