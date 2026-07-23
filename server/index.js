@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { connectDB } from './config/db.js';
 import contactRoutes from './routes/contactRoutes.js';
@@ -80,11 +81,43 @@ app.use('/api/projects', projectRoutes);
 
 // --- UNIFIED SINGLE-PORT STATIC FRONTEND SERVING ---
 const clientDistPath = path.resolve(__dirname, '../client/dist');
-app.use(express.static(clientDistPath));
+const clientIndexPath = path.join(clientDistPath, 'index.html');
 
-// Fallback for React SPA client-side routing
+// Serve compiled React build assets
+app.use(express.static(clientDistPath, { index: false }));
+
+// SPA fallback — serve index.html for all non-API routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(clientDistPath, 'index.html'));
+  if (fs.existsSync(clientIndexPath)) {
+    // Inline error callback — never bubble to errorHandler
+    res.sendFile(clientIndexPath, (err) => {
+      if (err && !res.headersSent) {
+        res.status(200).send(`
+          <!DOCTYPE html>
+          <html lang="en">
+            <head><meta charset="UTF-8"><title>Jawad Portfolio</title></head>
+            <body style="font-family:system-ui,sans-serif;background:#0b0f1a;color:#f5f7fa;text-align:center;padding:4rem 2rem;">
+              <h1 style="color:#00d4ff;">🚀 Backend API Server Active</h1>
+              <p style="color:#a0aac0;margin-top:1rem;">Open <a href="http://localhost:5173" style="color:#6c63ff;font-weight:600;">http://localhost:5173</a> for the Vite dev frontend.</p>
+              <p style="color:#a0aac0;margin-top:.5rem;">Or run <code>npm run build</code> then restart this server to serve the frontend here.</p>
+            </body>
+          </html>
+        `);
+      }
+    });
+  } else {
+    res.status(200).send(`
+      <!DOCTYPE html>
+      <html lang="en">
+        <head><meta charset="UTF-8"><title>Jawad Portfolio</title></head>
+        <body style="font-family:system-ui,sans-serif;background:#0b0f1a;color:#f5f7fa;text-align:center;padding:4rem 2rem;">
+          <h1 style="color:#00d4ff;">🚀 Backend API Server Active</h1>
+          <p style="color:#a0aac0;margin-top:1rem;">Frontend build not found. Open <a href="http://localhost:5173" style="color:#6c63ff;font-weight:600;">http://localhost:5173</a> for Vite dev server.</p>
+          <p style="color:#a0aac0;margin-top:.5rem;">To serve frontend on this port, run <code>npm run build</code> first.</p>
+        </body>
+      </html>
+    `);
+  }
 });
 
 // Error Handler

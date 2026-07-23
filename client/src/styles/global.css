@@ -74,6 +74,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Custom Utility Classes */
 .gradient-text {
   background: var(--gradient-brand);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -89,6 +90,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: inherit;
   padding: 1px;
   background: var(--gradient-brand);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
