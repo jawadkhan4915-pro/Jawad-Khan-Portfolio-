@@ -1,3 +1,9 @@
+import easyPosThumb from '../assets/easy-pos-thumb.png';
+import restaurantOsThumb from '../assets/restaurant-os-thumb.png';
+import universityLmsThumb from '../assets/university-lms-thumb.png';
+import hospitalManagementThumb from '../assets/hospital-management-thumb.png';
+import ecommercePlatformThumb from '../assets/ecommerce-platform-thumb.png';
+
 export const PERSONAL_INFO = {
   name: 'Jawad Khan',
   title: 'Full Stack MERN Web Developer | Flutter Mobile App Developer',
@@ -83,6 +89,7 @@ export const PROJECTS = [
     id: 'easy-pos',
     title: 'Easy POS — Automobile POS & Workshop Management System',
     tagline: 'Enterprise Auto-Shop & Workshop Management POS Engine',
+    image: easyPosThumb,
     description:
       'A fully featured enterprise-grade Point of Sale and Workshop Management System built for automobile repair shops. The system handles real-time parts inventory, mechanic service invoicing, customer records, staff attendance, and financial analytics — all from a unified admin dashboard.',
     category: 'Full Stack',
@@ -129,6 +136,7 @@ export const PROJECTS = [
     id: 'restaurant-os',
     title: 'RestaurantOS — Enterprise Cloud Restaurant SaaS',
     tagline: 'AI-Powered Cloud Restaurant POS & Kitchen Operating System',
+    image: restaurantOsThumb,
     description:
       'RestaurantOS is a full enterprise-grade cloud SaaS for restaurant chains. It features a touch-first POS terminal, real-time Kitchen Display System (KDS), AI-powered inventory forecasting via Ollama/OpenRouter LLM integration, multi-branch support, CRM, employee scheduling, and an analytics dashboard — all synchronized via WebSockets.',
     category: 'Full Stack',
@@ -176,6 +184,7 @@ export const PROJECTS = [
     id: 'university-lms',
     title: 'University LMS',
     tagline: 'Comprehensive Learning Management & Student Portal System',
+    image: universityLmsThumb,
     description:
       'A full-featured Learning Management System for universities covering course enrollment, assignment submission, faculty grading, and admin management. Designed for real multi-role usage with three distinct dashboards: Student, Instructor, and Admin — each with scoped data access.',
     category: 'Full Stack',
@@ -219,6 +228,7 @@ export const PROJECTS = [
     id: 'hospital-management',
     title: 'Hospital Management System',
     tagline: 'Clinical Workflow, Patient Records & Appointment Scheduler',
+    image: hospitalManagementThumb,
     description:
       'A digital hospital management platform handling the complete clinical workflow — from patient registration and EMR (Electronic Medical Records) to doctor appointment scheduling, prescription logging, lab report management, and billing. Multi-department role access with strict data privacy controls.',
     category: 'Full Stack',
@@ -262,6 +272,7 @@ export const PROJECTS = [
     id: 'ecommerce-platform',
     title: 'E-Commerce Platform',
     tagline: 'Full-Featured Online Shopping & Cart Checkout System',
+    image: ecommercePlatformThumb,
     description:
       'A complete e-commerce web application with product catalog browsing, category filtering, cart management, checkout flow, and order history. Includes a full authentication system with user profile management, and an admin panel for product CRUD operations and order processing.',
     category: 'Full Stack',

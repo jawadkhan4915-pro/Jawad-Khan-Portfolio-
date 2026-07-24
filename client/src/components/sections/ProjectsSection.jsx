@@ -96,6 +96,18 @@ export const ProjectsSection = () => {
               )}
 
               <div>
+                {/* Thumbnail Image Banner */}
+                {project.image && (
+                  <div className="w-full h-44 sm:h-48 rounded-xl overflow-hidden mb-4 relative border border-border-glass bg-bg-secondary/80">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-bg-card/80 via-transparent to-transparent opacity-60" />
+                  </div>
+                )}
+
                 {/* Category tag */}
                 <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-accent-2 mb-2 block">
                   {project.category}

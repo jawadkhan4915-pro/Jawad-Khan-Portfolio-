@@ -90,7 +90,34 @@ export const ProjectModal = ({ project, onClose }) => {
           }} />
 
           {/* ══════════════ HEADER ══════════════ */}
-          <div style={{ padding: '32px 32px 0', position: 'relative' }}>
+          {/* Thumbnail Banner */}
+          {project.image && (
+            <div style={{
+              width: '100%',
+              height: '200px',
+              position: 'relative',
+              overflow: 'hidden',
+              borderBottom: '1px solid var(--modal-divider)',
+            }}>
+              <img
+                src={project.image}
+                alt={project.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'top center',
+                }}
+              />
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, var(--modal-bg) 100%)',
+              }} />
+            </div>
+          )}
+
+          <div style={{ padding: '24px 32px 0', position: 'relative' }}>
             {/* Close Button */}
             <button
               onClick={onClose}
