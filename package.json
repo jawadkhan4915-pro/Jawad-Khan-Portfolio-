@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently --kill-others-on-fail --names \"SERVER,CLIENT\" --prefix-colors \"cyan,magenta\" \"npm run server\" \"npm run client\"",
     "server": "node server/index.js",
-    "client": "cd client && npx vite",
+    "client": "npm run dev --prefix client",
     "start": "node server/index.js",
     "build": "cd client && npx vite build",
     "build:client": "cd client && npx vite build"
