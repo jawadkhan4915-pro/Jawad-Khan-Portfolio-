@@ -19,6 +19,26 @@
   --border-glass:   rgba(200, 169, 110, 0.12);
   --success: #7DAE82;
   --error:   #E07070;
+
+  /* ── Modal — DARK mode: solid opaque surfaces ── */
+  --modal-bg:            #1E211A;   /* solid warm-dark surface */
+  --modal-border:        rgba(200, 169, 110, 0.20);
+  --modal-heading:       #F2EDE4;   /* cream white */
+  --modal-subtext:       #C8BFB0;   /* warm taupe */
+  --modal-body-text:     #BDB5A4;   /* warm secondary */
+  --modal-label:         #7A7262;   /* muted */
+  --modal-divider:       rgba(200, 169, 110, 0.14);
+  --modal-desc-bg:       #14160F;
+  --modal-desc-border:   rgba(200, 169, 110, 0.12);
+  --modal-chip-bg:       #252A1E;
+  --modal-chip-border:   rgba(200, 169, 110, 0.20);
+  --modal-chip-text:     #D4C5A9;
+  --modal-tab-active-bg: #14160F;
+  --modal-badge-bg:      rgba(200, 169, 110, 0.10);
+  --modal-badge-border:  rgba(200, 169, 110, 0.30);
+  --modal-item-bg:       #14160F;
+  --modal-item-border:   rgba(200, 169, 110, 0.10);
+  --modal-footer-bg:     #191C14;
 }
 
 :root[data-theme="light"] {
@@ -35,6 +55,26 @@
   --border-glass:   rgba(28, 26, 20, 0.10);
   --success: #5A8A5E;
   --error:   #C0504A;
+
+  /* ── Modal — LIGHT mode: solid opaque white surfaces, dark text ── */
+  --modal-bg:            #FFFFFF;   /* pure solid white — fully opaque */
+  --modal-border:        rgba(155, 122, 62, 0.25);
+  --modal-heading:       #1C1A14;   /* near-black heading */
+  --modal-subtext:       #3A3328;   /* dark warm brown */
+  --modal-body-text:     #4A4336;   /* readable dark brown */
+  --modal-label:         #6B6050;   /* medium brown label */
+  --modal-divider:       rgba(28, 26, 20, 0.12);
+  --modal-desc-bg:       #F7F3EC;   /* warm off-white */
+  --modal-desc-border:   rgba(155, 122, 62, 0.18);
+  --modal-chip-bg:       #EDE8DC;   /* warm cream chip */
+  --modal-chip-border:   rgba(155, 122, 62, 0.25);
+  --modal-chip-text:     #2C2820;   /* very dark readable text */
+  --modal-tab-active-bg: #F0EBE0;   /* warm tinted tab */
+  --modal-badge-bg:      rgba(155, 122, 62, 0.10);
+  --modal-badge-border:  rgba(155, 122, 62, 0.30);
+  --modal-item-bg:       #F7F3EC;   /* solid off-white list items */
+  --modal-item-border:   rgba(155, 122, 62, 0.15);
+  --modal-footer-bg:     #F0EBE0;   /* warm footer bg */
 }
 
 * {
