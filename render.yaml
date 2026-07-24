@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: jawad-portfolio-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd server && npm install
+    startCommand: cd server && node index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      - key: EMAIL_SERVICE
+        value: gmail
+      - key: EMAIL_USER
+        value: jawad.khan4915@gmail.com
+      - key: EMAIL_PASS
+        sync: false
+      - key: NOTIFICATION_EMAIL
+        value: jawad.khan4915@gmail.com
