@@ -14,7 +14,23 @@ export const ProjectsSection = () => {
     const loadProjects = async () => {
       const data = await fetchProjects();
       if (data && data.length > 0) {
-        setProjectsList(data);
+        // Merge API data with local static PROJECTS to preserve images & detailed tech breakdowns
+        const merged = data.map((apiItem) => {
+          const staticMatch = PROJECTS.find(
+            (p) => p.id === apiItem.id || p.title === apiItem.title
+          );
+          return {
+            ...staticMatch,
+            ...apiItem,
+            image: staticMatch?.image || apiItem.image,
+            description: staticMatch?.description || apiItem.description,
+            oopStrategy: staticMatch?.oopStrategy || apiItem.oopStrategy,
+            dataHandling: staticMatch?.dataHandling || apiItem.dataHandling,
+            algorithms: staticMatch?.algorithms || apiItem.algorithms,
+            security: staticMatch?.security || apiItem.security,
+          };
+        });
+        setProjectsList(merged);
       }
     };
     loadProjects();
@@ -90,7 +106,7 @@ export const ProjectsSection = () => {
             >
               {/* Featured Ribbon */}
               {project.featured && (
-                <div className="absolute top-4 right-4 flex items-center gap-1 text-[10px] font-semibold uppercase font-mono tracking-wider px-2.5 py-0.5 rounded-full bg-accent-3/15 text-accent-3 border border-accent-3/30">
+                <div className="absolute top-4 right-4 flex items-center gap-1 text-[10px] font-semibold uppercase font-mono tracking-wider px-2.5 py-0.5 rounded-full bg-accent-3/15 text-accent-3 border border-accent-3/30 z-10">
                   <Sparkles className="w-3 h-3" /> Featured
                 </div>
               )}
@@ -177,7 +193,7 @@ export const ProjectsSection = () => {
               </div>
 
               {/* Card Footer Actions */}
-              <div className="flex items-center gap-3 pt-4 border-t border-border-glass" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center gap-3 pt-4 border-t border-border-glass mt-4" onClick={(e) => e.stopPropagation()}>
                 <a
                   href={project.liveUrl}
                   target="_blank"
