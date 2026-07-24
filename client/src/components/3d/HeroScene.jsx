@@ -28,10 +28,10 @@ export const HeroScene = () => {
         gl={{ antialias: true, alpha: true }}
         dpr={[1, 2]}
       >
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[10, 10, 5]} intensity={1.5} color="#6C63FF" />
-        <pointLight position={[-10, -10, -5]} intensity={1.2} color="#00D4FF" />
-        <spotLight position={[0, 15, 10]} angle={0.3} penumbra={1} intensity={1} color="#FF6EC7" />
+        <ambientLight intensity={0.5} color="#F2EDE4" />
+        <directionalLight position={[10, 10, 5]} intensity={1.4} color="#C8A96E" />
+        <pointLight position={[-10, -10, -5]} intensity={1.1} color="#7DAE82" />
+        <spotLight position={[0, 15, 10]} angle={0.3} penumbra={1} intensity={0.9} color="#D4C5A9" />
 
         <Suspense fallback={<CanvasLoader />}>
           <Stars radius={100} depth={50} count={3500} factor={4} saturation={0} fade speed={1.5} />

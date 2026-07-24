@@ -1,39 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg-primary:   #0B0F1A;   /* deep navy-black base */
-  --bg-secondary: #121826;   /* slightly lighter panel/section bg */
-  --bg-card:      #161D2E;   /* card/glass surface base */
-  --accent-1:     #6C63FF;   /* electric indigo */
-  --accent-2:     #00D4FF;   /* cyan */
-  --accent-3:     #FF6EC7;   /* soft magenta */
-  --gradient-brand: linear-gradient(135deg, #6C63FF 0%, #00D4FF 100%);
-  --text-primary:   #F5F7FA;
-  --text-secondary: #A0AAC0;
-  --text-muted:     #6B7488;
-  --border-glass:   rgba(255, 255, 255, 0.08);
-  --success: #34D399;
-  --error:   #FB7185;
+  /* Dark palette — warm cream, sage green, ivory-taupe inspired by the photo */
+  --bg-primary:   #0E0F0B;   /* warm near-black with olive undertone */
+  --bg-secondary: #14160F;   /* slightly lighter warm-dark panel */
+  --bg-card:      #1A1D14;   /* warm dark card with subtle green tint */
+  --accent-1:     #C8A96E;   /* warm golden-beige — sweater stripe tone */
+  --accent-2:     #7DAE82;   /* sage green — plant leaf tone */
+  --accent-3:     #D4C5A9;   /* soft ivory-cream — background wall tone */
+  --gradient-brand: linear-gradient(135deg, #C8A96E 0%, #7DAE82 100%);
+  --text-primary:   #F2EDE4;  /* warm cream white */
+  --text-secondary: #BDB5A4;  /* warm taupe */
+  --text-muted:     #7A7262;  /* warm muted brown */
+  --border-glass:   rgba(200, 169, 110, 0.12);
+  --success: #7DAE82;
+  --error:   #E07070;
 }
 
 :root[data-theme="light"] {
-  --bg-primary:   #F7F8FC;
-  --bg-secondary: #FFFFFF;
-  --bg-card:      #FFFFFF;
-  --accent-1:     #5B4FE9;   /* deepened indigo */
-  --accent-2:     #00A8CC;   /* deepened cyan */
-  --accent-3:     #E64BA5;
-  --gradient-brand: linear-gradient(135deg, #5B4FE9 0%, #00A8CC 100%);
-  --text-primary:   #10131C;
-  --text-secondary: #4B5468;
-  --text-muted:     #7A8299;
-  --border-glass:   rgba(16, 19, 28, 0.08);
-  --success: #059669;
-  --error:   #E11D48;
+  --bg-primary:   #F5F0E8;   /* warm ivory parchment */
+  --bg-secondary: #EDE8DC;   /* slightly warm cream */
+  --bg-card:      #FDFAF5;   /* soft cream white */
+  --accent-1:     #9B7A3E;   /* deeper warm gold */
+  --accent-2:     #5A8A5E;   /* deeper sage green */
+  --accent-3:     #8C7A6B;   /* warm taupe */
+  --gradient-brand: linear-gradient(135deg, #9B7A3E 0%, #5A8A5E 100%);
+  --text-primary:   #1C1A14;  /* warm near-black */
+  --text-secondary: #4A4336;  /* warm dark brown */
+  --text-muted:     #7A7060;  /* warm medium brown */
+  --border-glass:   rgba(28, 26, 20, 0.10);
+  --success: #5A8A5E;
+  --error:   #C0504A;
 }
 
 * {
@@ -112,8 +113,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .glass-card:hover {
-  border-color: rgba(108, 99, 255, 0.4);
-  box-shadow: 0 12px 40px rgba(108, 99, 255, 0.15);
+  border-color: rgba(200, 169, 110, 0.45);
+  box-shadow: 0 12px 40px rgba(200, 169, 110, 0.18);
   transform: translateY(-4px);
 }
 
@@ -128,13 +129,13 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgba(247, 248, 252, 0.85);
 }
 
-/* Radial Glow Orbs */
+/* Radial Glow Orbs — warm golden + sage green */
 .glow-orb-1 {
   position: absolute;
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(108, 99, 255, 0.25) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(200, 169, 110, 0.22) 0%, rgba(0, 0, 0, 0) 70%);
   filter: blur(60px);
   pointer-events: none;
 }
@@ -144,9 +145,35 @@ h1, h2, h3, h4, h5, h6 {
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(125, 174, 130, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
   filter: blur(60px);
   pointer-events: none;
+}
+
+/* Profile Photo Frame */
+.profile-photo-frame {
+  position: relative;
+  display: inline-block;
+}
+.profile-photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: var(--gradient-brand);
+  z-index: -1;
+  filter: blur(2px);
+  opacity: 0.8;
+}
+.profile-photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+  background: var(--gradient-brand);
+  z-index: -2;
+  filter: blur(16px);
+  opacity: 0.35;
 }
 
 /* Custom Cursor styling */

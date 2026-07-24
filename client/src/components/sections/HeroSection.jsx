@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Download, Sparkles, MapPin, Github, Code2, Layers } from 'lucide-react';
 import { HeroScene } from '../3d/HeroScene';
 import { PERSONAL_INFO } from '../../data/portfolioData';
+import profilePhoto from '../../assets/jawad-profile.jpg';
 
 export const HeroSection = () => {
   return (
@@ -127,6 +128,139 @@ export const HeroSection = () => {
               </a>
             </motion.div>
           </div>
+
+          {/* Right Column: Profile Photo */}
+          <motion.div
+            initial={{ opacity: 0, x: 40, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-4 flex flex-col items-center justify-center relative"
+          >
+            {/* Floating ambient glow behind photo */}
+            <div
+              style={{
+                position: 'absolute',
+                width: '110%',
+                height: '110%',
+                borderRadius: '50%',
+                background: 'radial-gradient(ellipse, rgba(200,169,110,0.28) 0%, rgba(125,174,130,0.15) 45%, transparent 70%)',
+                filter: 'blur(32px)',
+                zIndex: 0,
+              }}
+            />
+
+            {/* Photo card */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative z-10"
+              style={{ display: 'inline-block' }}
+            >
+              {/* Gradient border ring */}
+              <div
+                style={{
+                  padding: '3px',
+                  borderRadius: '1.75rem',
+                  background: 'linear-gradient(135deg, #C8A96E 0%, #7DAE82 50%, #D4C5A9 100%)',
+                  boxShadow: '0 0 40px rgba(200,169,110,0.30), 0 0 80px rgba(125,174,130,0.15)',
+                }}
+              >
+                <div
+                  style={{
+                    borderRadius: '1.5rem',
+                    overflow: 'hidden',
+                    width: '260px',
+                    height: '340px',
+                  }}
+                >
+                  <img
+                    src={profilePhoto}
+                    alt="Jawad Khan — Full Stack Developer"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'top center',
+                      display: 'block',
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Floating experience badge */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.9, duration: 0.5 }}
+                style={{
+                  position: 'absolute',
+                  top: '16px',
+                  right: '-28px',
+                  background: 'rgba(26, 29, 20, 0.92)',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(200,169,110,0.35)',
+                  borderRadius: '0.75rem',
+                  padding: '8px 14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '2px',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+                  minWidth: '76px',
+                }}
+              >
+                <span style={{ fontSize: '22px', fontWeight: 800, background: 'linear-gradient(135deg, #C8A96E, #7DAE82)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1 }}>2+</span>
+                <span style={{ fontSize: '9px', color: '#BDB5A4', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.07em', textAlign: 'center', lineHeight: 1.3 }}>Years Exp.</span>
+              </motion.div>
+
+              {/* Floating projects badge */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.1, duration: 0.5 }}
+                style={{
+                  position: 'absolute',
+                  bottom: '20px',
+                  left: '-32px',
+                  background: 'rgba(26, 29, 20, 0.92)',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(125,174,130,0.35)',
+                  borderRadius: '0.75rem',
+                  padding: '8px 14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '2px',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+                  minWidth: '80px',
+                }}
+              >
+                <span style={{ fontSize: '22px', fontWeight: 800, background: 'linear-gradient(135deg, #7DAE82, #C8A96E)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1 }}>15+</span>
+                <span style={{ fontSize: '9px', color: '#BDB5A4', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.07em', textAlign: 'center', lineHeight: 1.3 }}>Projects</span>
+              </motion.div>
+
+              {/* Floating MERN tag */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.3, duration: 0.5 }}
+                style={{
+                  position: 'absolute',
+                  bottom: '-18px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  background: 'linear-gradient(135deg, rgba(200,169,110,0.15), rgba(125,174,130,0.15))',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(200,169,110,0.3)',
+                  borderRadius: '2rem',
+                  padding: '6px 16px',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <span style={{ fontSize: '11px', color: '#D4C5A9', fontWeight: 600, fontFamily: 'monospace', letterSpacing: '0.1em' }}>⚡ MERN · Flutter · Node.js</span>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

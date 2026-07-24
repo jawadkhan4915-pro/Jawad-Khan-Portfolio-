@@ -102,18 +102,25 @@ export const ProjectsSection = () => {
                 </span>
 
                 {/* Project Title */}
-                <h3 className="text-xl font-bold font-display text-text-primary group-hover:text-accent-2 transition-colors mb-2 flex items-center justify-between">
+                <h3 className="text-xl font-bold font-display text-text-primary group-hover:text-accent-1 transition-colors mb-2 flex items-center justify-between">
                   <span>{project.title}</span>
-                  <ArrowUpRight className="w-5 h-5 text-text-muted group-hover:text-accent-2 transition-colors shrink-0" />
+                  <ArrowUpRight className="w-5 h-5 text-text-muted group-hover:text-accent-1 transition-colors shrink-0" />
                 </h3>
 
                 {/* Tagline */}
-                <p className="text-text-secondary text-xs sm:text-sm mb-4 line-clamp-2">
+                <p className="text-text-secondary text-xs sm:text-sm mb-3 line-clamp-2 font-medium">
                   {project.tagline}
                 </p>
 
+                {/* Description */}
+                {project.description && (
+                  <p className="text-text-muted text-xs leading-relaxed mb-4 line-clamp-3">
+                    {project.description}
+                  </p>
+                )}
+
                 {/* Tech Stack Badges */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
+                <div className="flex flex-wrap gap-1.5 mb-4">
                   {project.techStack.slice(0, 4).map((tech, tIdx) => (
                     <span
                       key={tIdx}
@@ -129,15 +136,32 @@ export const ProjectsSection = () => {
                   )}
                 </div>
 
-                {/* Highlight Bullets */}
-                <ul className="space-y-2 mb-6">
-                  {project.highlights.slice(0, 2).map((highlight, hIdx) => (
-                    <li key={hIdx} className="flex items-start gap-2 text-xs text-text-secondary leading-relaxed">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-accent-1 shrink-0 mt-0.5" />
-                      <span className="line-clamp-2">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Technical Detail Badges */}
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {project.security?.length > 0 && (
+                    <span className="flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold rounded-full border"
+                      style={{ borderColor: 'rgba(125,174,130,0.4)', color: 'var(--accent-2)', background: 'rgba(125,174,130,0.08)' }}>
+                      <CheckCircle2 className="w-2.5 h-2.5" />
+                      {project.security.length} Security Layers
+                    </span>
+                  )}
+                  {project.algorithms?.length > 0 && (
+                    <span className="flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold rounded-full border"
+                      style={{ borderColor: 'rgba(200,169,110,0.4)', color: 'var(--accent-1)', background: 'rgba(200,169,110,0.08)' }}>
+                      <Sparkles className="w-2.5 h-2.5" />
+                      {project.algorithms.length} Algorithms
+                    </span>
+                  )}
+                  {project.oopStrategy?.length > 0 && (
+                    <span className="flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold rounded-full border"
+                      style={{ borderColor: 'rgba(200,169,110,0.25)', color: 'var(--accent-3)', background: 'rgba(212,197,169,0.06)' }}>
+                      <Layers className="w-2.5 h-2.5" />
+                      OOP Patterns
+                    </span>
+                  )}
+                </div>
+
+                <p className="text-[10px] text-text-muted font-mono tracking-wide">↑ Click card to explore technical details</p>
               </div>
 
               {/* Card Footer Actions */}

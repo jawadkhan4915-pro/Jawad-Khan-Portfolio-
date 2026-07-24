@@ -24,6 +24,7 @@ export default {
       fontFamily: {
         display: ['Space Grotesk', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
       },
       animation: {
         'pulse-glow': 'pulseGlow 3s infinite ease-in-out',
@@ -41,8 +42,8 @@ export default {
         }
       },
       boxShadow: {
-        'glow-indigo': '0 0 25px rgba(108, 99, 255, 0.35)',
-        'glow-cyan': '0 0 25px rgba(0, 212, 255, 0.35)',
+        'glow-indigo': '0 0 25px rgba(200, 169, 110, 0.40)',
+        'glow-cyan': '0 0 25px rgba(125, 174, 130, 0.40)',
         'glass-card': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
       }
     },
