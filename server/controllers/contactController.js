@@ -9,33 +9,27 @@ const contactValidationSchema = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters').max(3000),
 });
 
-/* ── Build transporter once on module load (reuse across requests) ── */
-let transporter = null;
+/**
+ * Dynamically gets or creates the Nodemailer transporter using process.env at runtime
+ */
+const getTransporter = () => {
+  const emailUser = process.env.EMAIL_USER || 'jawad.khan4915@gmail.com';
+  const emailPass = process.env.EMAIL_PASS || 'hdgddpjsnbqhdpwh';
+  const emailService = process.env.EMAIL_SERVICE || 'gmail';
 
-if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-  transporter = nodemailer.createTransport({
-    service: process.env.EMAIL_SERVICE || 'gmail',
+  if (!emailUser || !emailPass) {
+    console.warn('⚠️  EMAIL_USER or EMAIL_PASS missing from environment variables');
+    return null;
+  }
+
+  return nodemailer.createTransport({
+    service: emailService,
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: emailUser,
+      pass: emailPass,
     },
   });
-
-  /* Verify SMTP connection at startup so errors surface immediately */
-  transporter.verify((error) => {
-    if (error) {
-      console.error('❌ SMTP connection failed:', error.message);
-      console.error('   → Check EMAIL_USER and EMAIL_PASS in server/.env');
-      console.error('   → Make sure EMAIL_PASS is a Gmail App Password (not your login password)');
-      transporter = null; // disable sending if credentials are bad
-    } else {
-      console.log('✅ SMTP transporter ready — email notifications active');
-      console.log(`   → Sending to: ${process.env.NOTIFICATION_EMAIL || process.env.EMAIL_USER}`);
-    }
-  });
-} else {
-  console.warn('⚠️  EMAIL_USER / EMAIL_PASS not set in .env — email notifications disabled');
-}
+};
 
 export const submitContactForm = async (req, res, next) => {
   try {
@@ -51,7 +45,7 @@ export const submitContactForm = async (req, res, next) => {
     const { name, email, subject, message } = parseResult.data;
     const ipAddress = req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
-    /* ── Save to MongoDB ── */
+    /* ── 1. Save to MongoDB (optional resilience) ── */
     let savedContact = null;
     try {
       savedContact = await Contact.create({
@@ -65,11 +59,17 @@ export const submitContactForm = async (req, res, next) => {
       console.warn('MongoDB save warning:', dbErr.message);
     }
 
-    /* ── Send notification email ── */
+    /* ── 2. Send notification email via Nodemailer ── */
+    const transporter = getTransporter();
+    let emailSent = false;
+
     if (transporter) {
+      const recipient = process.env.NOTIFICATION_EMAIL || process.env.EMAIL_USER || 'jawad.khan4915@gmail.com';
+      const sender = process.env.EMAIL_USER || 'jawad.khan4915@gmail.com';
+
       const mailOptions = {
-        from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-        to: process.env.NOTIFICATION_EMAIL || process.env.EMAIL_USER,
+        from: `"Portfolio Contact" <${sender}>`,
+        to: recipient,
         replyTo: email,
         subject: `📩 Portfolio Message from ${name}: ${subject || 'New Contact Request'}`,
         html: `
@@ -80,7 +80,7 @@ export const submitContactForm = async (req, res, next) => {
                 📩 New Portfolio Message
               </h1>
               <p style="margin: 8px 0 0; font-size: 13px; color: rgba(255,255,255,0.85);">
-                Someone contacted you via your portfolio
+                Someone contacted you via your portfolio website
               </p>
             </div>
 
@@ -126,7 +126,7 @@ export const submitContactForm = async (req, res, next) => {
             <!-- Footer -->
             <div style="padding: 16px 32px; background: #ede8dc; text-align: center;">
               <p style="font-size: 11px; color: #7A7060; margin: 0;">
-                Sent from <strong>Jawad Khan's Portfolio</strong> contact form · ${new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })} PKT
+                Sent from <strong>Jawad Khan's Portfolio</strong> contact form
               </p>
             </div>
           </div>
@@ -135,17 +135,23 @@ export const submitContactForm = async (req, res, next) => {
 
       try {
         const info = await transporter.sendMail(mailOptions);
-        console.log(`✅ Email sent successfully — Message ID: ${info.messageId}`);
+        console.log(`✅ EMAIL DISPATCHED SUCCESSFULLY! Message ID: ${info.messageId}`);
+        emailSent = true;
       } catch (emailErr) {
-        console.error('❌ Email send failed:', emailErr.message);
+        console.error('❌ Email dispatch failed:', emailErr.message);
+        return res.status(500).json({
+          success: false,
+          message: `Failed to send email: ${emailErr.message}`,
+        });
       }
     } else {
-      console.log('ℹ️  No email sent (transporter not configured)');
+      console.warn('⚠️ Could not initialize Nodemailer transporter');
     }
 
     return res.status(201).json({
       success: true,
       message: 'Thank you for reaching out! Your message has been sent successfully.',
+      emailSent,
       data: savedContact ? { id: savedContact._id, createdAt: savedContact.createdAt } : null,
     });
   } catch (error) {

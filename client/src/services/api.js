@@ -9,7 +9,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000,
+  timeout: 15000,
 });
 
 export const submitContact = async (formData) => {
@@ -20,10 +20,7 @@ export const submitContact = async (formData) => {
     if (error.response && error.response.data) {
       throw new Error(error.response.data.message || 'Failed to submit contact form');
     }
-    return {
-      success: true,
-      message: 'Thank you! Message submitted successfully.',
-    };
+    throw new Error(error.message || 'Could not connect to the backend server. Please check your network connection.');
   }
 };
 

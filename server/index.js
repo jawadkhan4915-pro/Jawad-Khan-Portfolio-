@@ -6,15 +6,18 @@ import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env from both server folder and root folder
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
 import { connectDB } from './config/db.js';
 import contactRoutes from './routes/contactRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 import { errorHandler } from './middleware/errorMiddleware.js';
-
-dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 let PORT = process.env.PORT || 5000;
@@ -57,7 +60,7 @@ app.use(express.urlencoded({ extended: true }));
 // Rate Limiting for Contact API
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 20,
   message: {
     success: false,
     message: 'Too many contact requests from this IP. Please try again after 15 minutes.',
@@ -89,7 +92,6 @@ app.use(express.static(clientDistPath, { index: false }));
 // SPA fallback — serve index.html for all non-API routes
 app.get('*', (req, res) => {
   if (fs.existsSync(clientIndexPath)) {
-    // Inline error callback — never bubble to errorHandler
     res.sendFile(clientIndexPath, (err) => {
       if (err && !res.headersSent) {
         res.status(200).send(`
@@ -98,8 +100,7 @@ app.get('*', (req, res) => {
             <head><meta charset="UTF-8"><title>Jawad Portfolio</title></head>
             <body style="font-family:system-ui,sans-serif;background:#0b0f1a;color:#f5f7fa;text-align:center;padding:4rem 2rem;">
               <h1 style="color:#00d4ff;">🚀 Backend API Server Active</h1>
-              <p style="color:#a0aac0;margin-top:1rem;">Open <a href="http://localhost:5173" style="color:#6c63ff;font-weight:600;">http://localhost:5173</a> for the Vite dev frontend.</p>
-              <p style="color:#a0aac0;margin-top:.5rem;">Or run <code>npm run build</code> then restart this server to serve the frontend here.</p>
+              <p style="color:#a0aac0;margin-top:1rem;">Open <a href="http://localhost:5173" style="color:#6c63ff;font-weight:600;">http://localhost:5173</a> for Vite dev server.</p>
             </body>
           </html>
         `);
@@ -113,7 +114,6 @@ app.get('*', (req, res) => {
         <body style="font-family:system-ui,sans-serif;background:#0b0f1a;color:#f5f7fa;text-align:center;padding:4rem 2rem;">
           <h1 style="color:#00d4ff;">🚀 Backend API Server Active</h1>
           <p style="color:#a0aac0;margin-top:1rem;">Frontend build not found. Open <a href="http://localhost:5173" style="color:#6c63ff;font-weight:600;">http://localhost:5173</a> for Vite dev server.</p>
-          <p style="color:#a0aac0;margin-top:.5rem;">To serve frontend on this port, run <code>npm run build</code> first.</p>
         </body>
       </html>
     `);
@@ -125,7 +125,6 @@ app.use(errorHandler);
 
 const server = app.listen(PORT, () => {
   console.log(`\n🚀 Jawad Khan Portfolio App running on SINGLE PORT: http://localhost:${PORT}`);
-  console.log(`🌐 Frontend Web App & 3D Engine: http://localhost:${PORT}`);
   console.log(`⚡ Backend REST APIs: http://localhost:${PORT}/api/health\n`);
 });
 
