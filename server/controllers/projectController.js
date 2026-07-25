@@ -51,7 +51,7 @@ const INITIAL_PROJECTS = [
     title: 'Hospital Management System',
     tagline: 'Clinical Workflow, Patient Records & Appointment Scheduler',
     category: 'Full Stack',
-    liveUrl: 'https://hospital-managment-system-kappa.vercel.app',
+    liveUrl: 'https://hospital-managment-system-peach.vercel.app',
     githubUrl: 'https://github.com/jawadkhan4915-pro',
     techStack: ['React.js', 'Node.js', 'Express', 'MongoDB', 'REST APIs'],
     highlights: [
