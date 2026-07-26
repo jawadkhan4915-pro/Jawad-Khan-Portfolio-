@@ -232,7 +232,7 @@ export const PROJECTS = [
     description:
       'A digital hospital management platform handling the complete clinical workflow — from patient registration and EMR (Electronic Medical Records) to doctor appointment scheduling, prescription logging, lab report management, and billing. Multi-department role access with strict data privacy controls.',
     category: 'Full Stack',
-    liveUrl: 'https://hospital-managment-system-peach.vercel.app',
+    liveUrl: 'https://hospital-managment-system-seven.vercel.app',
     githubUrl: 'https://github.com/jawadkhan4915-pro/Hospital_Managment_System',
     techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'JWT', 'bcrypt', 'Mongoose', 'Tailwind CSS'],
     highlights: [
