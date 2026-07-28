@@ -224,3 +224,119 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50%;
   transition: transform 0.15s ease-out, background-color 0.2s ease, width 0.2s ease, height 0.2s ease;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIME CODER SCENE — Background & Particle styles
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Deep starfield / gradient background for hero ── */
+.anime-bg-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(125,174,130,0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 25% 30%,  rgba(200,169,110,0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 35% at 75% 25%,  rgba(126,207,255,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ── Ambient floating dots ── */
+.ambient-dot {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: ambientFloat 5s ease-in-out infinite;
+}
+
+@keyframes ambientFloat {
+  0%   { opacity: 0;    transform: translateY(0px) scale(0.8); }
+  25%  { opacity: 0.7;  transform: translateY(-14px) scale(1); }
+  50%  { opacity: 0.45; transform: translateY(-28px) scale(0.9); }
+  75%  { opacity: 0.65; transform: translateY(-14px) scale(1.05); }
+  100% { opacity: 0;    transform: translateY(0px) scale(0.8); }
+}
+
+/* ── Neon grid infinite scroll (handled by anime.js but CSS fallback) ── */
+.neon-grid {
+  opacity: 0.65;
+  will-change: transform;
+}
+
+/* ── Holographic rings (anime.js controls scale/opacity) ── */
+.holo-ring {
+  will-change: transform, opacity;
+  transform-origin: center;
+}
+
+/* ── Code particles (anime.js controls) ── */
+.code-particle {
+  will-change: transform, opacity;
+  user-select: none;
+}
+
+/* ── Cherry petals (anime.js controls) ── */
+.petal {
+  will-change: transform, opacity;
+  transform-origin: center;
+}
+
+/* ── Chibi character bounce ── */
+.chibi-group {
+  will-change: transform;
+  transform-origin: center bottom;
+}
+
+/* ── Monitor glow ── */
+.monitor-glow {
+  will-change: opacity;
+  mix-blend-mode: screen;
+}
+
+/* ── Data streams ── */
+.data-stream {
+  will-change: stroke-dashoffset, opacity;
+}
+
+/* ── Code lines in monitor ── */
+.code-line-anim {
+  will-change: opacity;
+}
+
+/* ── Steam rising ── */
+.steam {
+  will-change: transform, opacity;
+}
+
+/* ── Code cursor blink ── */
+.code-cursor {
+  will-change: opacity;
+}
+
+/* ── Glasses glint ── */
+.glasses-glint {
+  will-change: opacity, transform;
+}
+
+/* ── Mobile petal container ── */
+.mobile-petals-container {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(125,174,130,0.12) 0%, transparent 70%);
+}
+
+/* ── Animate spin slow (Tailwind extension for mobile fallback) ── */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(1.08); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+

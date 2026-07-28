@@ -12,6 +12,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@react-three/drei": "^9.109.2",
     "@react-three/fiber": "^8.16.8",
+    "animejs": "^4.5.0",
     "axios": "^1.7.2",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.19",

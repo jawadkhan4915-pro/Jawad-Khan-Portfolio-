@@ -1,0 +1,7 @@
+{
+  // Tell VS Code's CSS language server to ignore unknown at-rules.
+  // @tailwind base/components/utilities are valid — processed by PostCSS/Tailwind,
+  // not by the browser directly, so the IDE warning is a false positive.
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore"
+}
