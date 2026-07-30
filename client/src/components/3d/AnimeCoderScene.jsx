@@ -104,35 +104,6 @@ export const AnimeCoderScene = () => {
           );
         });
 
-        // ── Chibi character idle bounce ────────────────────────
-        const character = qs('.chibi-group');
-        if (character) {
-          animsRef.current.push(
-            animate(character, {
-              translateY: [0, -7, 0],
-              duration: 2600,
-              ease: 'inOutSine',
-              loop: true,
-            })
-          );
-        }
-
-        // ── Glasses glint flash ────────────────────────────────
-        const glint = qs('.glasses-glint');
-        if (glint) {
-          animsRef.current.push(
-            animate(glint, {
-              opacity: [0, 1, 0],
-              translateX: [0, 10],
-              duration: 1600,
-              ease: 'outQuart',
-              loop: true,
-              delay: 3000,
-              loopDelay: 4500,
-            })
-          );
-        }
-
         // ── Data stream lines dash ─────────────────────────────
         qsa('.data-stream').forEach((s, i) => {
           animsRef.current.push(
