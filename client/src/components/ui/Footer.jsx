@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useAnimationFrame, useMotionValue } from 'framer-motion';
-import { Github, Mail, MapPin, ArrowUp, Heart, Code2, ExternalLink } from 'lucide-react';
+import { Github, Mail, MapPin, ArrowUp, Heart, Code2, ExternalLink, Download } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 
 /* ─── Infinite Marquee Strip ────────────────────────────────────────── */
@@ -220,17 +220,28 @@ export const Footer = () => {
                 <span>Direct Email</span>
                 <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
+
+              <a
+                href="/Jawad_Khan_CV.pdf"
+                download="Jawad_Khan_CV.pdf"
+                className="inline-flex items-center gap-2.5 text-sm text-text-secondary hover:text-accent-1 transition-colors group"
+              >
+                <div className="p-2 rounded-lg bg-bg-card border border-border-glass group-hover:border-accent-1 transition-colors">
+                  <Download className="w-4 h-4 text-accent-1" />
+                </div>
+                <span>Download CV (PDF)</span>
+                <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Copyright row */}
+        {/* Developer Credit & Copyright row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
-          <p style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
-            <span>© {new Date().getFullYear()} Jawad Khan.</span>
-            <span>Built with</span>
-            <Heart className="w-3 h-3 text-accent-1 inline" />
-            <span>using MERN Stack, Flutter &amp; Three.js.</span>
+          <p style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            <span>Developer: <strong className="text-text-primary font-semibold">M.jawad khan</strong></span>
+            <span className="text-border-glass">•</span>
+            <span>Email: <a href="mailto:jawad.khan4915@gmail.com" className="text-accent-1 hover:underline font-mono">jawad.khan4915@gmail.com</a></span>
           </p>
 
           <motion.button

@@ -9,7 +9,7 @@ export const PERSONAL_INFO = {
   title: 'Full Stack MERN Web Developer | Flutter Mobile App Developer',
   location: 'Rahim Yar Khan, Pakistan',
   github: 'https://github.com/jawadkhan4915-pro',
-  email: 'jawadkhan4915.pro@gmail.com',
+  email: 'jawad.khan4915@gmail.com',
   bio: 'Motivated full stack developer with hands-on experience building web and mobile apps using the MERN stack and Flutter. Strong foundation in frontend/backend development, authentication systems (JWT, bcrypt, RBAC), and database-driven applications.',
   education: [
     {

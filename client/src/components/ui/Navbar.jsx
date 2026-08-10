@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Code2, Send } from 'lucide-react';
+import { Menu, X, Code2, Send, Download } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 
@@ -97,6 +97,14 @@ export const Navbar = () => {
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
           <a
+            href="/Jawad_Khan_CV.pdf"
+            download="Jawad_Khan_CV.pdf"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent-1/50 bg-bg-card/80 text-accent-1 hover:bg-accent-1/10 hover:border-accent-1 font-medium text-xs sm:text-sm transition-all"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Download CV</span>
+          </a>
+          <a
             href="#contact"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent-1 to-accent-2 text-white font-medium text-sm shadow-glow-indigo hover:shadow-glow-cyan hover:scale-[1.02] active:scale-[0.98] transition-all"
           >
@@ -140,9 +148,18 @@ export const Navbar = () => {
                 </a>
               ))}
               <a
+                href="/Jawad_Khan_CV.pdf"
+                download="Jawad_Khan_CV.pdf"
+                onClick={() => setMobileMenuOpen(false)}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-accent-1/50 bg-bg-card text-accent-1 font-medium text-base transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download CV</span>
+              </a>
+              <a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-accent-1 to-accent-2 text-white font-medium text-base shadow-glow-indigo mt-2"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-accent-1 to-accent-2 text-white font-medium text-base shadow-glow-indigo mt-1"
               >
                 <span>Get in Touch</span>
                 <Send className="w-4 h-4" />

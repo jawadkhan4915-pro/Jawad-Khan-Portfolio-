@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Award, CheckCircle, Code, ShieldCheck, Cpu } from 'lucide-react';
+import { GraduationCap, Award, CheckCircle, Code, ShieldCheck, Cpu, Download } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 
 export const AboutSection = () => {
@@ -53,9 +53,20 @@ export const AboutSection = () => {
                 I am a passionate software engineer based in Rahim Yar Khan, Pakistan. I specialize in designing and deploying full-stack web applications using the <strong className="text-text-primary">MERN Stack (MongoDB, Express.js, React.js, Node.js)</strong> and cross-platform mobile apps using <strong className="text-text-primary">Flutter &amp; Dart</strong>.
               </p>
 
-              <p className="text-text-secondary text-base leading-relaxed mb-8">
+              <p className="text-text-secondary text-base leading-relaxed mb-6">
                 My technical depth spans modern frontend user experiences, production REST APIs, real-time Socket.IO systems, and robust database architecture with MongoDB aggregation pipelines. I emphasize secure backend authentication implementations including <strong className="text-accent-2">JWT, Bcrypt hashing, and Role-Based Access Control (RBAC)</strong>.
               </p>
+
+              <div className="mb-8">
+                <a
+                  href="/Jawad_Khan_CV.pdf"
+                  download="Jawad_Khan_CV.pdf"
+                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-gradient-to-r from-accent-1 to-accent-2 text-white font-medium text-sm shadow-glow-indigo hover:shadow-glow-cyan hover:scale-[1.02] active:scale-[0.98] transition-all"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Download Full CV (PDF)</span>
+                </a>
+              </div>
             </div>
 
             {/* Stats Grid */}

@@ -111,6 +111,15 @@ export const HeroSection = () => {
               </a>
 
               <a
+                href="/Jawad_Khan_CV.pdf"
+                download="Jawad_Khan_CV.pdf"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-bg-card/90 border border-accent-1/60 text-accent-1 hover:bg-accent-1/10 hover:border-accent-1 text-base font-medium transition-all shadow-glow-indigo/20 hover:scale-[1.03] active:scale-[0.98]"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download CV</span>
+              </a>
+
+              <a
                 href="#contact"
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-bg-card/80 border border-border-glass text-text-primary hover:border-accent-1 hover:bg-bg-card text-base font-medium transition-all"
               >
