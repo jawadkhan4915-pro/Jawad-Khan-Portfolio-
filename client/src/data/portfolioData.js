@@ -3,6 +3,7 @@ import restaurantOsThumb from '../assets/restaurant-os-thumb.png';
 import universityLmsThumb from '../assets/university-lms-thumb.png';
 import hospitalManagementThumb from '../assets/hospital-management-thumb.png';
 import ecommercePlatformThumb from '../assets/ecommerce-platform-thumb.png';
+import novaBankThumb from '../assets/nova-bank-thumb.png';
 
 export const PERSONAL_INFO = {
   name: 'Jawad Khan',
@@ -34,7 +35,7 @@ export const PERSONAL_INFO = {
     },
   ],
   stats: [
-    { label: 'Production Projects', value: 5, suffix: '+' },
+    { label: 'Production Projects', value: 6, suffix: '+' },
     { label: 'MERN & Flutter Skills', value: 12, suffix: '+' },
     { label: 'Backend Architecture', value: 100, suffix: '%' },
     { label: 'Code Quality & Security', value: 99, suffix: '%' },
@@ -85,6 +86,53 @@ export const SKILLS = [
 ];
 
 export const PROJECTS = [
+  {
+    id: 'nova-bank',
+    title: 'NovaBank — Private Ledger & Multi-Asset Neo-Banking Suite',
+    tagline: 'Institutional-Grade Multi-Asset Neo-Bank, Crypto Lending & Virtual Card Engine',
+    image: novaBankThumb,
+    description:
+      'NovaBank is a full-featured neo-banking and private ledger platform built with TypeScript and the MERN stack. It offers multi-currency digital asset wallets (USD, BTC, ETH, SOL, BNB, BCH), virtual debit card issuance with real-time card charging, crypto-collateralized lending protocols with dynamic LTV calculations, peer-to-peer asset conversion, and specialized administrative portals for bank managers and compliance officers.',
+    category: 'Full Stack',
+    liveUrl: 'https://nova-bank-client.vercel.app',
+    githubUrl: 'https://github.com/jawadkhan4915-pro/NovaBank',
+    techStack: ['React', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'Framer Motion', 'Zustand', 'AES-256', 'JWT', 'RBAC', 'REST APIs'],
+    highlights: [
+      'Multi-asset digital banking: Multi-currency wallets (USD, BTC, ETH, SOL, BNB, BCH), instant internal transfers, and dynamic deposit address generation with simulated blockchain confirmations.',
+      'Multi-tier virtual cards engine: Instant card issuance (Standard, Platinum, Gold, Elite), live card charge simulation, CVV/PIN reveal security, freeze/unfreeze controls, and custom spending limits.',
+      'Crypto-backed lending & P2P conversion: Dynamic Loan-to-Value (LTV) margin calculation, automated interest schedules, liquidation threshold monitoring, and P2P asset swap.',
+      'Role-based multi-portal architecture: Segregated operational portals for Account Holders, Support Agents, and Bank Managers with ledger auditing, KYC approval workflows, and dispute management.',
+    ],
+    oopStrategy: [
+      'Modular Monorepo Architecture: Clear separation into @novabank/shared (contracts/types), server (Express/TypeScript REST API), and client (React/Vite)',
+      'Service Layer & Repository Pattern: Business logic decoupled into dedicated domain services (WalletService, CardService, LoanService, LedgerService)',
+      'Observer & Event Emission: Transaction ledger updates automatically trigger balance reconciliation and real-time notification events',
+      'Strategy Pattern for Asset Conversion: Pluggable conversion strategies for fiat-to-crypto and crypto-to-crypto market rate calculations',
+      'Domain Model Encapsulation: Strict TypeScript interfaces and domain aggregates enforcing immutable transaction audit trails',
+    ],
+    dataHandling: [
+      'Double-Entry Ledger Architecture: Every credit/debit transaction recorded with immutable audit trails and running balance snapshots',
+      'Mongoose atomic transactions & sessions: Multi-step financial operations (transfers, card charges, loan disbursements) executed with ACID guarantees',
+      'Zustand persistent client store: High-performance normalized state with granular subscription re-renders and auto-hydration',
+      'Real-time financial math: Decimal-precision balance calculations, interest rate accrual, and dynamic collateral LTV tracking',
+      'Client-side caching and Axios interceptors for automatic Bearer token injection and session recovery',
+    ],
+    algorithms: [
+      'Dynamic Loan-to-Value (LTV) Algorithm: Real-time calculation: LTV = (Loan Principal / Collateral Value) * 100 with automated health-factor scoring',
+      'Luhn Algorithm & Card Generation: Cryptographically secure 16-digit card number generation compliant with Mod 10 Luhn check',
+      'O(1) Hash-Map Role & Permission Matrix: Instant sub-millisecond RBAC route authorization checks',
+      'Binary search & indexed cursor pagination on transaction ledger for high-throughput history queries',
+    ],
+    security: [
+      'AES-256-GCM application-layer encryption for card CVVs, PINs, and sensitive user identification data',
+      'JWT Dual-Token Rotation: Short-lived access tokens (15m) + secure refresh token rotation with blacklist revocation',
+      'Role-Based Access Control (RBAC): Strict four-tier permission hierarchy (USER, SUPPORT_AGENT, BANK_MANAGER, ADMIN)',
+      'Inactivity session timeout manager with automatic client-side lockdown and memory cleanup',
+      'Helmet.js HTTP security headers, CORS origin whitelisting, and Express rate limiting on auth and financial transfer endpoints',
+    ],
+    featured: true,
+    accent: 'var(--accent-1)',
+  },
   {
     id: 'easy-pos',
     title: 'Easy POS — Automobile POS & Workshop Management System',

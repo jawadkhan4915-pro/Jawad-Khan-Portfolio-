@@ -2,6 +2,22 @@ import { Project } from '../models/Project.js';
 
 const INITIAL_PROJECTS = [
   {
+    id: 'nova-bank',
+    title: 'NovaBank — Private Ledger & Multi-Asset Neo-Banking Suite',
+    tagline: 'Institutional-Grade Multi-Asset Neo-Bank, Crypto Lending & Virtual Card Engine',
+    category: 'Full Stack',
+    liveUrl: 'https://nova-bank-client.vercel.app',
+    githubUrl: 'https://github.com/jawadkhan4915-pro/NovaBank',
+    techStack: ['React', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'Framer Motion', 'Zustand', 'AES-256', 'JWT', 'RBAC'],
+    highlights: [
+      'Multi-currency digital asset wallets (USD, BTC, ETH, SOL, BNB, BCH) with real-time conversion and simulated on-chain confirmations.',
+      'Virtual card engine with multi-tier issuance, live charging, CVV/PIN reveal security, freeze/unfreeze controls, and custom limits.',
+      'Crypto-backed lending protocols with dynamic LTV margin calculations, automated interest schedules, and liquidation monitoring.',
+      'Multi-portal RBAC for Account Holders, Support Agents, and Bank Managers with ledger auditing, KYC compliance, and dispute resolution.',
+    ],
+    featured: true,
+  },
+  {
     id: 'easy-pos',
     title: 'Easy POS — Automobile POS & Workshop Management System',
     tagline: 'Enterprise Auto-Shop & Workshop Management POS Engine',
