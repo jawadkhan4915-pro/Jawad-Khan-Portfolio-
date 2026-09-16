@@ -50,12 +50,12 @@ export const ExperienceSection = () => {
   ];
 
   return (
-    <section id="experience" className="py-24 relative overflow-hidden">
+    <section id="experience" className="py-16 sm:py-24 relative overflow-hidden">
       <div className="glow-orb-1 top-1/2 left-0 opacity-20 pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -69,17 +69,17 @@ export const ExperienceSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-5xl font-bold font-display text-text-primary mt-2"
+            className="text-2xl xs:text-3xl sm:text-5xl font-bold font-display text-text-primary mt-2"
           >
             Professional <span className="gradient-text">Timeline</span>
           </motion.h2>
-          <p className="text-text-secondary text-sm sm:text-base mt-4">
+          <p className="text-text-secondary text-xs sm:text-base mt-3 sm:mt-4">
             Academic degree education and specialized software development institute certifications.
           </p>
         </div>
 
         {/* Vertical Timeline */}
-        <div className="relative border-l-2 border-border-glass ml-4 sm:ml-32 space-y-12">
+        <div className="relative border-l-2 border-border-glass ml-3.5 xs:ml-4 sm:ml-32 space-y-8 sm:space-y-12">
           {timelineItems.map((item, idx) => {
             const Icon = item.icon;
 
@@ -90,11 +90,11 @@ export const ExperienceSection = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.15 }}
-                className="relative pl-8 sm:pl-10 group"
+                className="relative pl-5 xs:pl-7 sm:pl-10 group"
               >
                 {/* Timeline Dot Node */}
-                <div className="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-bg-card border-2 border-accent-1 flex items-center justify-center shadow-glow-indigo group-hover:scale-115 transition-transform">
-                  <Icon className="w-4 h-4 text-accent-2" />
+                <div className="absolute -left-[15px] sm:-left-[17px] top-1 sm:top-1.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-bg-card border-2 border-accent-1 flex items-center justify-center shadow-glow-indigo group-hover:scale-110 transition-transform">
+                  <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent-2" />
                 </div>
 
                 {/* Left Period Label (on desktop) */}
@@ -105,7 +105,7 @@ export const ExperienceSection = () => {
                 </div>
 
                 {/* Timeline Content Glass Card */}
-                <div className="glass-card p-6 sm:p-8">
+                <div className="glass-card p-4 xs:p-6 sm:p-8">
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                     <span className="sm:hidden text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-bg-secondary text-accent-2 border border-border-glass">
                       {item.period}
@@ -115,11 +115,11 @@ export const ExperienceSection = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold font-display text-text-primary mb-1">
+                  <h3 className="text-lg xs:text-xl sm:text-2xl font-bold font-display text-text-primary mb-1">
                     {item.title}
                   </h3>
 
-                  <div className="flex flex-wrap items-center gap-4 text-xs text-text-secondary mb-4">
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-text-secondary mb-3 sm:mb-4">
                     <span className="font-semibold text-text-primary">{item.institute}</span>
                     <span className="flex items-center gap-1 text-text-muted">
                       <MapPin className="w-3.5 h-3.5 text-accent-2" />
@@ -127,9 +127,9 @@ export const ExperienceSection = () => {
                     </span>
                   </div>
 
-                  <ul className="space-y-2 border-t border-border-glass pt-4">
+                  <ul className="space-y-2 border-t border-border-glass pt-3 sm:pt-4">
                     {item.details.map((detail, dIdx) => (
-                      <li key={dIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-text-secondary leading-relaxed">
+                      <li key={dIdx} className="flex items-start gap-2 sm:gap-2.5 text-xs sm:text-sm text-text-secondary leading-relaxed">
                         <CheckCircle className="w-4 h-4 text-success shrink-0 mt-0.5" />
                         <span>{detail}</span>
                       </li>

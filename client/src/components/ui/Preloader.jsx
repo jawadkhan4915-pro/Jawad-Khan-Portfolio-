@@ -47,7 +47,7 @@ export const Preloader = ({ onComplete }) => {
         </p>
 
         {/* Progress Bar */}
-        <div className="w-64 h-1.5 bg-bg-secondary rounded-full overflow-hidden border border-border-glass relative">
+        <div className="w-48 xs:w-64 max-w-[80vw] mx-auto h-1.5 bg-bg-secondary rounded-full overflow-hidden border border-border-glass relative">
           <motion.div
             className="h-full bg-gradient-to-r from-accent-1 to-accent-2"
             style={{ width: `${progress}%` }}

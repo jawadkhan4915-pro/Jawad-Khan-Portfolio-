@@ -35,305 +35,306 @@ export const ProjectModal = ({ project, onClose }) => {
   if (!project) return null;
 
   const activeData = project[activeTab] || project.highlights || [];
-  const tabsAvailable = TAB_CONFIG.filter(t => project[t.key]?.length > 0);
+  const tabsAvailable = TAB_CONFIG.filter((t) => project[t.key]?.length > 0);
 
   return (
     <AnimatePresence>
       {/* ── Full-screen container ── */}
-      <div
-        className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto"
-        style={{ padding: '24px 16px 48px' }}
-      >
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 xs:p-4 sm:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(0, 0, 0, 0.82)',
-            backdropFilter: 'blur(8px)',
-            WebkitBackdropFilter: 'blur(8px)',
-          }}
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm"
         />
 
         {/* ── Modal Window ── */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.93, y: 28 }}
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.93, y: 28 }}
+          exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ type: 'spring', damping: 28, stiffness: 340 }}
           style={{
-            position: 'relative',
-            zIndex: 10,
-            width: '100%',
-            maxWidth: '760px',
-            marginTop: '16px',
-            borderRadius: '20px',
-            overflow: 'hidden',
-            /* Solid backgrounds — completely opaque in both modes */
             backgroundColor: 'var(--modal-bg)',
-            border: '1px solid var(--modal-border)',
-            boxShadow: '0 32px 80px rgba(0,0,0,0.55)',
+            borderColor: 'var(--modal-border)',
           }}
-          /* Inject CSS custom props that override per theme */
-          className="modal-root"
+          className="modal-root relative z-10 w-full max-w-2xl my-auto rounded-2xl sm:rounded-3xl border shadow-2xl overflow-hidden max-h-[92vh] flex flex-col"
         >
           {/* ── Decorative top-right glow ── */}
-          <div style={{
-            position: 'absolute', top: '-60px', right: '-60px',
-            width: '200px', height: '200px', borderRadius: '50%',
-            background: 'radial-gradient(circle, var(--accent-1), transparent 70%)',
-            opacity: 0.18, pointerEvents: 'none', filter: 'blur(30px)',
-          }} />
+          <div
+            style={{
+              position: 'absolute',
+              top: '-50px',
+              right: '-50px',
+              width: '180px',
+              height: '180px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, var(--accent-1), transparent 70%)',
+              opacity: 0.18,
+              pointerEvents: 'none',
+              filter: 'blur(30px)',
+            }}
+          />
 
-          {/* ══════════════ HEADER ══════════════ */}
-          {/* Thumbnail Banner */}
-          {project.image && (
-            <div style={{
-              width: '100%',
-              height: '200px',
-              position: 'relative',
-              overflow: 'hidden',
-              borderBottom: '1px solid var(--modal-divider)',
-            }}>
-              <img
-                src={project.image}
-                alt={project.title}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'top center',
-                }}
-              />
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, var(--modal-bg) 100%)',
-              }} />
-            </div>
-          )}
+          {/* Close Button (Always accessible top-right) */}
+          <button
+            onClick={onClose}
+            aria-label="Close modal"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 p-2 rounded-full cursor-pointer transition-all touch-target"
+            style={{
+              background: 'var(--modal-chip-bg)',
+              border: '1px solid var(--modal-chip-border)',
+              color: 'var(--text-secondary)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = 'var(--accent-1)';
+              e.currentTarget.style.borderColor = 'var(--accent-1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = 'var(--text-secondary)';
+              e.currentTarget.style.borderColor = 'var(--modal-chip-border)';
+            }}
+          >
+            <X size={18} />
+          </button>
 
-          <div style={{ padding: '24px 32px 0', position: 'relative' }}>
-            {/* Close Button */}
-            <button
-              onClick={onClose}
-              aria-label="Close modal"
-              style={{
-                position: 'absolute', top: '20px', right: '20px',
-                padding: '8px', borderRadius: '50%', cursor: 'pointer',
-                background: 'var(--modal-chip-bg)',
-                border: '1px solid var(--modal-chip-border)',
-                color: 'var(--text-secondary)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                transition: 'all 0.2s',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent-1)'; e.currentTarget.style.borderColor = 'var(--accent-1)'; }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.borderColor = 'var(--modal-chip-border)'; }}
-            >
-              <X size={18} />
-            </button>
-
-            {/* Category Badge */}
-            <span style={{
-              display: 'inline-block', marginBottom: '12px',
-              padding: '4px 12px', borderRadius: '999px',
-              fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
-              background: 'var(--modal-badge-bg)',
-              border: '1px solid var(--modal-badge-border)',
-              color: 'var(--accent-1)',
-            }}>
-              {project.category}
-            </span>
-
-            <h2 style={{
-              fontSize: 'clamp(20px, 4vw, 28px)', fontWeight: 800,
-              fontFamily: "'Space Grotesk', sans-serif",
-              color: 'var(--modal-heading)',
-              marginBottom: '6px', paddingRight: '40px', lineHeight: 1.25,
-            }}>
-              {project.title}
-            </h2>
-
-            <p style={{ fontSize: '15px', color: 'var(--modal-subtext)', marginBottom: '16px', lineHeight: 1.6 }}>
-              {project.tagline}
-            </p>
-
-            {/* Description box */}
-            {project.description && (
-              <p style={{
-                fontSize: '13px', lineHeight: 1.7,
-                color: 'var(--modal-body-text)',
-                background: 'var(--modal-desc-bg)',
-                border: '1px solid var(--modal-desc-border)',
-                borderRadius: '12px', padding: '14px 16px', marginBottom: '20px',
-              }}>
-                {project.description}
-              </p>
+          {/* ══════════════ SCROLLABLE MODAL BODY ══════════════ */}
+          <div className="overflow-y-auto flex-1 hide-scrollbar">
+            {/* Thumbnail Banner */}
+            {project.image && (
+              <div
+                className="w-full h-36 xs:h-44 sm:h-52 relative overflow-hidden shrink-0 border-b"
+                style={{ borderColor: 'var(--modal-divider)' }}
+              >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover object-top"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, var(--modal-bg) 100%)',
+                  }}
+                />
+              </div>
             )}
 
-            {/* Tech Stack */}
-            <div style={{ marginBottom: '20px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-                <Cpu size={14} style={{ color: 'var(--accent-1)' }} />
-                <span style={{
-                  fontSize: '10px', fontWeight: 700, textTransform: 'uppercase',
-                  letterSpacing: '0.1em', color: 'var(--modal-label)',
-                }}>Tech Stack</span>
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {project.techStack.map((tech, idx) => (
-                  <span key={idx} style={{
-                    padding: '4px 12px', borderRadius: '8px', fontSize: '12px', fontWeight: 600,
-                    fontFamily: 'monospace',
-                    background: 'var(--modal-chip-bg)',
-                    border: '1px solid var(--modal-chip-border)',
-                    color: 'var(--modal-chip-text)',
-                  }}>
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* ══════════════ TABS ══════════════ */}
-          <div style={{ padding: '0 32px', borderBottom: '1px solid var(--modal-divider)' }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2px' }}>
-              {tabsAvailable.map(({ key, label, icon: Icon }) => {
-                const isActive = activeTab === key;
-                return (
-                  <button
-                    key={key}
-                    onClick={() => setActiveTab(key)}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: '6px',
-                      padding: '10px 14px', fontSize: '12px', fontWeight: 600,
-                      cursor: 'pointer', border: 'none', borderRadius: '10px 10px 0 0',
-                      transition: 'all 0.2s',
-                      background: isActive ? 'var(--modal-tab-active-bg)' : 'transparent',
-                      color: isActive ? 'var(--modal-heading)' : 'var(--modal-label)',
-                      borderBottom: isActive ? '2px solid var(--accent-1)' : '2px solid transparent',
-                      outline: 'none',
-                    }}
-                  >
-                    <Icon size={13} style={{ color: isActive ? 'var(--accent-1)' : 'var(--modal-label)' }} />
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* ══════════════ TAB CONTENT ══════════════ */}
-          <div style={{ padding: '20px 32px', minHeight: '220px' }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.18 }}
+            {/* Header Content */}
+            <div className="p-4 sm:p-7 md:p-8 pb-3 sm:pb-4 relative">
+              {/* Category Badge */}
+              <span
+                className="inline-block mb-2 sm:mb-3 px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider border"
+                style={{
+                  background: 'var(--modal-badge-bg)',
+                  borderColor: 'var(--modal-badge-border)',
+                  color: 'var(--accent-1)',
+                }}
               >
-                {/* Section heading */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                  {React.createElement(TAB_CONFIG.find(t => t.key === activeTab)?.icon || Layers, {
-                    size: 15,
-                    style: { color: 'var(--accent-1)' },
-                  })}
-                  <span style={{
-                    fontSize: '10px', fontWeight: 700, textTransform: 'uppercase',
-                    letterSpacing: '0.1em', color: 'var(--modal-label)',
-                  }}>
-                    {SECTION_LABEL[activeTab]}
+                {project.category}
+              </span>
+
+              <h2
+                className="text-xl xs:text-2xl sm:text-3xl font-extrabold font-display leading-tight mb-2 pr-10"
+                style={{ color: 'var(--modal-heading)' }}
+              >
+                {project.title}
+              </h2>
+
+              <p
+                className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4"
+                style={{ color: 'var(--modal-subtext)' }}
+              >
+                {project.tagline}
+              </p>
+
+              {/* Description box */}
+              {project.description && (
+                <p
+                  className="text-xs sm:text-sm leading-relaxed rounded-xl p-3 sm:p-4 mb-4 border"
+                  style={{
+                    color: 'var(--modal-body-text)',
+                    background: 'var(--modal-desc-bg)',
+                    borderColor: 'var(--modal-desc-border)',
+                  }}
+                >
+                  {project.description}
+                </p>
+              )}
+
+              {/* Tech Stack */}
+              <div className="mb-2">
+                <div className="flex items-center gap-1.5 mb-2">
+                  <Cpu size={13} style={{ color: 'var(--accent-1)' }} />
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-wider"
+                    style={{ color: 'var(--modal-label)' }}
+                  >
+                    Tech Stack
                   </span>
                 </div>
-
-                <ul style={{ display: 'flex', flexDirection: 'column', gap: '10px', listStyle: 'none', margin: 0, padding: 0 }}>
-                  {activeData.map((item, idx) => (
-                    <motion.li
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                  {project.techStack.map((tech, idx) => (
+                    <span
                       key={idx}
-                      initial={{ opacity: 0, x: -12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.055 }}
+                      className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium border"
                       style={{
-                        display: 'flex', alignItems: 'flex-start', gap: '10px',
-                        padding: '12px 14px', borderRadius: '12px',
-                        background: 'var(--modal-item-bg)',
-                        border: '1px solid var(--modal-item-border)',
+                        background: 'var(--modal-chip-bg)',
+                        borderColor: 'var(--modal-chip-border)',
+                        color: 'var(--modal-chip-text)',
                       }}
                     >
-                      <CheckCircle2
-                        size={15}
-                        style={{ color: CHECK_COLOR[activeTab], flexShrink: 0, marginTop: '2px' }}
-                      />
-                      <span style={{
-                        fontSize: '13px', lineHeight: 1.65,
-                        color: 'var(--modal-body-text)',
-                        fontWeight: 500,
-                      }}>
-                        {item}
-                      </span>
-                    </motion.li>
+                      {tech}
+                    </span>
                   ))}
-                </ul>
-              </motion.div>
-            </AnimatePresence>
+                </div>
+              </div>
+            </div>
+
+            {/* ══════════════ HORIZONTAL SCROLLABLE TABS ══════════════ */}
+            <div
+              className="px-3 sm:px-7 md:px-8 border-b sticky top-0 z-10"
+              style={{
+                borderColor: 'var(--modal-divider)',
+                backgroundColor: 'var(--modal-bg)',
+              }}
+            >
+              <div className="flex items-center gap-1 sm:gap-1.5 overflow-x-auto hide-scrollbar whitespace-nowrap py-1">
+                {tabsAvailable.map(({ key, label, icon: Icon }) => {
+                  const isActive = activeTab === key;
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => setActiveTab(key)}
+                      className={`inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-all touch-target shrink-0 ${
+                        isActive
+                          ? 'border-b-2 font-bold'
+                          : 'opacity-70 hover:opacity-100'
+                      }`}
+                      style={{
+                        background: isActive ? 'var(--modal-tab-active-bg)' : 'transparent',
+                        color: isActive ? 'var(--modal-heading)' : 'var(--modal-label)',
+                        borderBottomColor: isActive ? 'var(--accent-1)' : 'transparent',
+                      }}
+                    >
+                      <Icon
+                        size={14}
+                        style={{ color: isActive ? 'var(--accent-1)' : 'var(--modal-label)' }}
+                      />
+                      <span>{label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* ══════════════ TAB CONTENT ══════════════ */}
+            <div className="p-4 sm:p-7 md:p-8 min-h-[180px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  {/* Section heading */}
+                  <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                    {React.createElement(
+                      TAB_CONFIG.find((t) => t.key === activeTab)?.icon || Layers,
+                      {
+                        size: 15,
+                        style: { color: 'var(--accent-1)' },
+                      }
+                    )}
+                    <span
+                      className="text-[10px] sm:text-xs font-bold uppercase tracking-wider"
+                      style={{ color: 'var(--modal-label)' }}
+                    >
+                      {SECTION_LABEL[activeTab]}
+                    </span>
+                  </div>
+
+                  <ul className="flex flex-col gap-2 sm:gap-2.5 list-none m-0 p-0">
+                    {activeData.map((item, idx) => (
+                      <motion.li
+                        key={idx}
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.04 }}
+                        className="flex items-start gap-2.5 p-3 rounded-xl border text-xs sm:text-sm leading-relaxed"
+                        style={{
+                          background: 'var(--modal-item-bg)',
+                          borderColor: 'var(--modal-item-border)',
+                          color: 'var(--modal-body-text)',
+                        }}
+                      >
+                        <CheckCircle2
+                          size={15}
+                          style={{
+                            color: CHECK_COLOR[activeTab],
+                            flexShrink: 0,
+                            marginTop: '2px',
+                          }}
+                        />
+                        <span className="font-medium">{item}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* ══════════════ FOOTER ACTIONS ══════════════ */}
-          <div style={{
-            display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '12px',
-            padding: '18px 32px',
-            borderTop: '1px solid var(--modal-divider)',
-            background: 'var(--modal-footer-bg)',
-          }}>
+          <div
+            className="p-3.5 sm:p-5 md:px-8 border-t flex flex-wrap items-center gap-2.5 sm:gap-3 shrink-0"
+            style={{
+              borderColor: 'var(--modal-divider)',
+              background: 'var(--modal-footer-bg)',
+            }}
+          >
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
+              className="flex-1 xs:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-white text-xs sm:text-sm font-bold shadow-md transition-all touch-target"
               style={{
-                display: 'inline-flex', alignItems: 'center', gap: '8px',
-                padding: '10px 24px', borderRadius: '12px',
                 background: 'linear-gradient(135deg, var(--accent-1), var(--accent-2))',
-                color: '#fff', fontSize: '13px', fontWeight: 700,
-                textDecoration: 'none', letterSpacing: '0.02em',
-                boxShadow: '0 4px 14px rgba(0,0,0,0.18)',
               }}
             >
-              Live Demo <ExternalLink size={14} />
+              <span>Live Demo</span>
+              <ExternalLink size={14} />
             </a>
 
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
+              className="flex-1 xs:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border transition-all touch-target"
               style={{
-                display: 'inline-flex', alignItems: 'center', gap: '8px',
-                padding: '10px 24px', borderRadius: '12px',
                 background: 'var(--modal-chip-bg)',
-                border: '1px solid var(--modal-chip-border)',
+                borderColor: 'var(--modal-chip-border)',
                 color: 'var(--modal-heading)',
-                fontSize: '13px', fontWeight: 600, textDecoration: 'none',
               }}
             >
-              <Github size={15} /> Source Code
+              <Github size={15} />
+              <span>Source Code</span>
             </a>
 
             {project.security?.length > 0 && (
-              <div style={{
-                marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '6px',
-                padding: '6px 14px', borderRadius: '999px',
-                background: 'rgba(90,138,94,0.12)',
-                border: '1px solid rgba(90,138,94,0.40)',
-                color: 'var(--accent-2)',
-                fontSize: '11px', fontWeight: 700,
-              }}>
+              <div
+                className="w-full xs:w-auto xs:ml-auto inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full border text-[11px] font-bold"
+                style={{
+                  background: 'rgba(90,138,94,0.12)',
+                  borderColor: 'rgba(90,138,94,0.40)',
+                  color: 'var(--accent-2)',
+                }}
+              >
                 <Lock size={12} />
-                {project.security.length} Security Layers
+                <span>{project.security.length} Security Layers</span>
               </div>
             )}
           </div>

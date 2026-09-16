@@ -51,13 +51,13 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative bg-bg-secondary/60 border-t border-border-glass">
+    <section id="contact" className="py-16 sm:py-24 relative bg-bg-secondary/60 border-t border-border-glass">
       <div className="glow-orb-1 top-1/3 left-10 opacity-30 pointer-events-none" />
       <div className="glow-orb-2 bottom-10 right-10 opacity-30 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -71,43 +71,43 @@ export const ContactSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-5xl font-bold font-display text-text-primary mt-2"
+            className="text-2xl xs:text-3xl sm:text-5xl font-bold font-display text-text-primary mt-2"
           >
             Let's Build Something <span className="gradient-text">Extraordinary</span>
           </motion.h2>
-          <p className="text-text-secondary text-sm sm:text-base mt-4">
+          <p className="text-text-secondary text-xs sm:text-base mt-3 sm:mt-4">
             Have a project in mind, a job opportunity, or want to discuss full-stack &amp; mobile development? Send me a message!
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-start">
           {/* Left Column: Direct Info Cards */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 space-y-6"
+            className="lg:col-span-5 space-y-4 sm:space-y-6"
           >
-            <div className="glass-card p-8 space-y-6">
-              <h3 className="text-2xl font-bold font-display text-text-primary mb-2">
+            <div className="glass-card p-5 xs:p-6 sm:p-8 space-y-4 sm:space-y-6">
+              <h3 className="text-xl sm:text-2xl font-bold font-display text-text-primary mb-1 sm:mb-2">
                 Contact Information
               </h3>
-              <p className="text-text-secondary text-sm leading-relaxed">
+              <p className="text-text-secondary text-xs sm:text-sm leading-relaxed">
                 Available for full-stack MERN engineering, Flutter mobile development, system architecture, and technical consulting.
               </p>
 
-              <div className="space-y-4 pt-4 border-t border-border-glass">
+              <div className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 border-t border-border-glass">
                 <a
                   href={`mailto:${PERSONAL_INFO.email}`}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-bg-secondary/70 border border-border-glass hover:border-accent-1 transition-all group"
+                  className="flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg-secondary/70 border border-border-glass hover:border-accent-1 transition-all group touch-target"
                 >
-                  <div className="p-3 rounded-lg bg-accent-1/10 text-accent-1 group-hover:scale-110 transition-transform">
-                    <Mail className="w-5 h-5" />
+                  <div className="p-2.5 sm:p-3 rounded-lg bg-accent-1/10 text-accent-1 group-hover:scale-110 transition-transform shrink-0">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <div>
-                    <span className="block text-xs font-mono uppercase text-text-muted">Direct Email</span>
-                    <span className="text-sm font-semibold text-text-primary group-hover:text-accent-1 transition-colors">
+                  <div className="min-w-0 flex-1">
+                    <span className="block text-[10px] sm:text-xs font-mono uppercase text-text-muted">Direct Email</span>
+                    <span className="text-xs sm:text-sm font-semibold text-text-primary group-hover:text-accent-1 transition-colors break-all">
                       {PERSONAL_INFO.email}
                     </span>
                   </div>
@@ -117,26 +117,26 @@ export const ContactSection = () => {
                   href={PERSONAL_INFO.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl bg-bg-secondary/70 border border-border-glass hover:border-accent-2 transition-all group"
+                  className="flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg-secondary/70 border border-border-glass hover:border-accent-2 transition-all group touch-target"
                 >
-                  <div className="p-3 rounded-lg bg-accent-2/10 text-accent-2 group-hover:scale-110 transition-transform">
-                    <Github className="w-5 h-5" />
+                  <div className="p-2.5 sm:p-3 rounded-lg bg-accent-2/10 text-accent-2 group-hover:scale-110 transition-transform shrink-0">
+                    <Github className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <div>
-                    <span className="block text-xs font-mono uppercase text-text-muted">GitHub Repository</span>
-                    <span className="text-sm font-semibold text-text-primary group-hover:text-accent-2 transition-colors">
+                  <div className="min-w-0 flex-1">
+                    <span className="block text-[10px] sm:text-xs font-mono uppercase text-text-muted">GitHub Repository</span>
+                    <span className="text-xs sm:text-sm font-semibold text-text-primary group-hover:text-accent-2 transition-colors truncate block">
                       @jawadkhan4915-pro
                     </span>
                   </div>
                 </a>
 
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-bg-secondary/70 border border-border-glass">
-                  <div className="p-3 rounded-lg bg-accent-3/10 text-accent-3">
-                    <MapPin className="w-5 h-5" />
+                <div className="flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-bg-secondary/70 border border-border-glass">
+                  <div className="p-2.5 sm:p-3 rounded-lg bg-accent-3/10 text-accent-3 shrink-0">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                   <div>
-                    <span className="block text-xs font-mono uppercase text-text-muted">Location</span>
-                    <span className="text-sm font-semibold text-text-primary">
+                    <span className="block text-[10px] sm:text-xs font-mono uppercase text-text-muted">Location</span>
+                    <span className="text-xs sm:text-sm font-semibold text-text-primary">
                       {PERSONAL_INFO.location}
                     </span>
                   </div>
@@ -151,9 +151,9 @@ export const ContactSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-7 glass-card p-8 sm:p-10"
+            className="lg:col-span-7 glass-card p-5 xs:p-6 sm:p-8 lg:p-10"
           >
-            <h3 className="text-2xl font-bold font-display text-text-primary mb-6">
+            <h3 className="text-xl sm:text-2xl font-bold font-display text-text-primary mb-4 sm:mb-6">
               Send a Direct Message
             </h3>
 
@@ -164,7 +164,7 @@ export const ContactSection = () => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="mb-6 p-4 rounded-xl bg-success/15 border border-success/30 text-success flex items-start gap-3"
+                  className="mb-5 sm:mb-6 p-3.5 sm:p-4 rounded-xl bg-success/15 border border-success/30 text-success flex items-start gap-3"
                 >
                   <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" />
                   <div>
@@ -184,7 +184,7 @@ export const ContactSection = () => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="mb-6 p-4 rounded-xl bg-error/15 border border-error/30 text-error flex items-start gap-3"
+                  className="mb-5 sm:mb-6 p-3.5 sm:p-4 rounded-xl bg-error/15 border border-error/30 text-error flex items-start gap-3"
                 >
                   <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
                   <div>
@@ -195,18 +195,18 @@ export const ContactSection = () => {
               )}
             </AnimatePresence>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 {/* Name */}
                 <div>
-                  <label className="block text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+                  <label className="block text-xs font-semibold text-text-secondary uppercase tracking-wider mb-1.5 sm:mb-2">
                     Your Name *
                   </label>
                   <input
                     type="text"
                     {...register('name')}
                     placeholder="e.g. John Doe"
-                    className="w-full px-4 py-3 rounded-xl bg-bg-secondary/80 border border-border-glass text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-1 transition-all text-sm"
+                    className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-bg-secondary/80 border border-border-glass text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-1 transition-all text-base sm:text-sm"
                   />
                   {errors.name && (
                     <span className="text-xs text-error mt-1 block">{errors.name.message}</span>
@@ -215,14 +215,14 @@ export const ContactSection = () => {
 
                 {/* Email */}
                 <div>
-                  <label className="block text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+                  <label className="block text-xs font-semibold text-text-secondary uppercase tracking-wider mb-1.5 sm:mb-2">
                     Your Email *
                   </label>
                   <input
                     type="email"
                     {...register('email')}
                     placeholder="e.g. john@example.com"
-                    className="w-full px-4 py-3 rounded-xl bg-bg-secondary/80 border border-border-glass text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-1 transition-all text-sm"
+                    className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-bg-secondary/80 border border-border-glass text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-1 transition-all text-base sm:text-sm"
                   />
                   {errors.email && (
                     <span className="text-xs text-error mt-1 block">{errors.email.message}</span>
@@ -232,27 +232,27 @@ export const ContactSection = () => {
 
               {/* Subject */}
               <div>
-                <label className="block text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-text-secondary uppercase tracking-wider mb-1.5 sm:mb-2">
                   Subject
                 </label>
                 <input
                   type="text"
                   {...register('subject')}
                   placeholder="Project Inquiry / Job Offer"
-                  className="w-full px-4 py-3 rounded-xl bg-bg-secondary/80 border border-border-glass text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-1 transition-all text-sm"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-bg-secondary/80 border border-border-glass text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-1 transition-all text-base sm:text-sm"
                 />
               </div>
 
               {/* Message */}
               <div>
-                <label className="block text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-text-secondary uppercase tracking-wider mb-1.5 sm:mb-2">
                   Message *
                 </label>
                 <textarea
-                  rows={5}
+                  rows={4}
                   {...register('message')}
                   placeholder="Hi Jawad, I'd like to discuss a project..."
-                  className="w-full px-4 py-3 rounded-xl bg-bg-secondary/80 border border-border-glass text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-1 transition-all text-sm resize-none"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-bg-secondary/80 border border-border-glass text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-1 transition-all text-base sm:text-sm resize-none"
                 />
                 {errors.message && (
                   <span className="text-xs text-error mt-1 block">{errors.message.message}</span>
@@ -263,7 +263,7 @@ export const ContactSection = () => {
               <button
                 type="submit"
                 disabled={submissionState.loading}
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-accent-1 to-accent-2 text-white font-semibold text-sm shadow-glow-indigo hover:shadow-glow-cyan hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-accent-1 to-accent-2 text-white font-semibold text-sm sm:text-base shadow-glow-indigo hover:shadow-glow-cyan hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2.5 disabled:opacity-50 disabled:cursor-not-allowed touch-target"
               >
                 {submissionState.loading ? (
                   <>

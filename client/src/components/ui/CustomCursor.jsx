@@ -5,10 +5,18 @@ import { useMobile } from '../../hooks/useMobile';
 export const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [isHovered, setIsHovered] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const isMobile = useMobile(768);
 
   useEffect(() => {
-    if (isMobile) return;
+    if (typeof window !== 'undefined') {
+      const isTouch = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+      setIsTouchDevice(isTouch);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isMobile || isTouchDevice) return;
 
     const onMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -35,9 +43,9 @@ export const CustomCursor = () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseover', onMouseOver);
     };
-  }, [isMobile]);
+  }, [isMobile, isTouchDevice]);
 
-  if (isMobile) return null;
+  if (isMobile || isTouchDevice) return null;
 
   return (
     <>
